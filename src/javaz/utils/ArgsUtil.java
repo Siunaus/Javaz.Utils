@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
  * @author Zero
  * @mail baozilaji@126.com
  * 参数解析工具类
- * 参数格式必须为（key=value）这种形式的
+ * 参数格式必须为（--key=value）这种形式
  * Aug 21, 2014
  */
 public class ArgsUtil {
@@ -43,6 +43,9 @@ public class ArgsUtil {
 					logger.warn(StringUtil.format("［{0}］参数异常", s), e);
 				}
 			}
+		}
+		if(logger.isInfoEnabled()){
+			logger.info(map);
 		}
 	}
 	/**
