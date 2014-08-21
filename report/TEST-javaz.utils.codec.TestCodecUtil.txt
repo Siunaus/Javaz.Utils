@@ -1,0 +1,7 @@
+Testsuite: javaz.utils.codec.TestCodecUtil
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.041 sec
+------------- Standard Output ---------------
+D7ED4EE1DF437474D005188535F74875
+------------- ---------------- ---------------
+
+Testcase: testMd5 took 0.04 sec

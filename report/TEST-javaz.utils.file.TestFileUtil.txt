@@ -1,0 +1,23 @@
+Testsuite: javaz.utils.file.TestFileUtil
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.005 sec
+------------- Standard Output ---------------
+#default properties file
+#
+version_name=1.00.01
+#
+version_code=10001
+
+#pool min size
+pool_min_size=1000
+#default properties file
+#
+version_name=1.00.01
+#
+version_code=10001
+
+#pool min size
+pool_min_size=1000
+
+------------- ---------------- ---------------
+
+Testcase: testGetFile took 0.004 sec

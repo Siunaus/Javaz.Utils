@@ -1,0 +1,10 @@
+Testsuite: javaz.utils.xls.TestXlsUtl
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.363 sec
+------------- Standard Output ---------------
+100
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+Warning:  Property storage name for 5 is empty - setting to Root Entry
+------------- ---------------- ---------------
+
+Testcase: testXls took 0.363 sec

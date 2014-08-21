@@ -1,0 +1,7 @@
+Testsuite: javaz.utils.math.TestMathUtil
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.003 sec
+------------- Standard Output ---------------
+7073581728
+------------- ---------------- ---------------
+
+Testcase: testRandom took 0.003 sec
