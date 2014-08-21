@@ -1,9 +1,9 @@
 Testsuite: javaz.utils.TestPathUtil
-Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.011 sec
+Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.004 sec
 ------------- Standard Output ---------------
 root path:/Users/Zero/Documents/Javaz.Utils/classes/
 DateUtil.class is in path:/Users/Zero/Documents/Javaz.Utils/classes/javaz/utils/date/
 ------------- ---------------- ---------------
 
-Testcase: testRootPath took 0.001 sec
-Testcase: testClassPath took 0.008 sec
+Testcase: testRootPath took 0.002 sec
+Testcase: testClassPath took 0.002 sec

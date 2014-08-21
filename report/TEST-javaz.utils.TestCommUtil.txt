@@ -5,4 +5,4 @@ Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.006 sec
 3
 ------------- ---------------- ---------------
 
-Testcase: testSubList took 0.003 sec
+Testcase: testSubList took 0.002 sec

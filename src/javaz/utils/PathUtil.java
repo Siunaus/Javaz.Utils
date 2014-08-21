@@ -3,6 +3,7 @@
  */
 package javaz.utils;
 
+import java.io.InputStream;
 import java.net.URL;
 
 import javaz.utils.string.StringUtil;
@@ -49,5 +50,23 @@ public class PathUtil {
 			}
 		}
 		return StringUtil.format("{0}/{1}", getRootClassPath(),res);
+	}
+	/**
+	 * 获取资源文件的流文件
+	 * @param res
+	 * @return
+	 */
+	public static InputStream getResourceInputStream(String res){
+		if(!StringUtil.isEmpty(res)){
+			if(res.startsWith("//")){
+				res=res.substring(1);
+			}
+			if(!res.startsWith("/")){
+				res=StringUtil.format("/{0}", res);
+			}
+		}else{
+			res="";
+		}
+		return PathUtil.class.getResourceAsStream(res);
 	}
 }

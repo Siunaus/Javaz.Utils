@@ -3,8 +3,7 @@
  */
 package javaz.utils.properties;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -32,14 +31,14 @@ public abstract class AbstractProperties {
 	 */
 	private Object lock=new Object();
 	public AbstractProperties(String fileInClassPath){
-		this.fileName=PathUtil.getResourcePath(fileInClassPath);
+		this.fileName=fileInClassPath;
 		properties=new Properties();
 		load();
 	}
 	private void load(){
 		try {
 			synchronized (lock) {
-				properties.load(new FileInputStream(new File(fileName)));
+				properties.load(new DataInputStream(PathUtil.getResourceInputStream(fileName)));
 			}
 			logger.debug(StringUtil.format("{0} load success.", fileName));
 		} catch (IOException e) {
