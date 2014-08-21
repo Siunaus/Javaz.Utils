@@ -1,8 +1,8 @@
 Testsuite: javaz.utils.xml.TestXmlUtil
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.077 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.075 sec
 ------------- Standard Output ---------------
 protocols
 true
 ------------- ---------------- ---------------
 
-Testcase: testXmlFile took 0.077 sec
+Testcase: testXmlFile took 0.075 sec

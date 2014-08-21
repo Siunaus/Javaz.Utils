@@ -1,5 +1,5 @@
 Testsuite: javaz.utils.file.TestFileUtil
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.005 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.006 sec
 ------------- Standard Output ---------------
 #default properties file
 #

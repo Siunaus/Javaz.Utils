@@ -1,7 +1,7 @@
 Testsuite: javaz.utils.string.TestStringUtil
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.006 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.009 sec
 ------------- Standard Output ---------------
-[2014/08/21 13:42:28] parse error:123156s:
+[2014/08/21 15:39:03] parse error:123156s:
 java.lang.NumberFormatException: For input string: "123156s"
 	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:48)
 	at java.lang.Long.parseLong(Long.java:419)
@@ -45,4 +45,4 @@ java.lang.NumberFormatException: For input string: "123156s"
 0
 ------------- ---------------- ---------------
 
-Testcase: testTo took 0.006 sec
+Testcase: testTo took 0.008 sec

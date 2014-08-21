@@ -1,7 +1,7 @@
 Testsuite: javaz.utils.date.TestDateUtil
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.08 sec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.078 sec
 ------------- Standard Output ---------------
-2014-08-23 13:42:28
+2014-08-23 15:39:03
 ------------- ---------------- ---------------
 
-Testcase: testDelay took 0.08 sec
+Testcase: testDelay took 0.078 sec

@@ -32,7 +32,7 @@ public abstract class AbstractProperties {
 	 */
 	private Object lock=new Object();
 	public AbstractProperties(String fileInClassPath){
-		this.fileName=StringUtil.format("{0}/{1}", PathUtil.getRootClassPath(),fileInClassPath);
+		this.fileName=PathUtil.getResourcePath(fileInClassPath);
 		properties=new Properties();
 		load();
 	}

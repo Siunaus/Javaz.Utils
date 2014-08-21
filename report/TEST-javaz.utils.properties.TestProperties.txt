@@ -1,10 +1,10 @@
 Testsuite: javaz.utils.properties.TestProperties
 Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.006 sec
 ------------- Standard Output ---------------
-/Users/Zero/workspace/Javaz.Utils/classes/
-[2014/08/21 13:42:28] /Users/Zero/workspace/Javaz.Utils/classes//default.properties load success.
+/Users/Zero/Documents/Javaz.Utils/classes/
+[2014/08/21 15:39:03] /Users/Zero/Documents/Javaz.Utils/classes/default.properties load success.
 1.00.01
 10001
 ------------- ---------------- ---------------
 
-Testcase: testGetProperties took 0.006 sec
+Testcase: testGetProperties took 0.005 sec
