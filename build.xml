@@ -86,7 +86,7 @@
 	<!-- =================================================================== -->
 	<!-- dist the classes directory                                          -->
 	<!-- =================================================================== -->
-	<target name="dist" depends="test">
+	<target name="dist" depends="compile">
 		<mkdir dir="${dist.dir}"/>
 		<jar destfile="${dist.dir}/${dist.name}-${dist.version}.jar" basedir="${classes.dir}">
 			<exclude name="**/Test*"/>
