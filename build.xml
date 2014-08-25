@@ -9,7 +9,7 @@
 	<property name="doc.dir" location="doc"/>
 	<property name="dist.dir" location="dist"/>
 	<property name="dist.name" value="${ant.project.name}"/>
-	<property name="dist.version" value="0.0.1"/>
+	<property name="dist.version" value="0.0.2"/>
 	
 	<!-- =================================================================== -->
 	<!-- clean                                                               -->

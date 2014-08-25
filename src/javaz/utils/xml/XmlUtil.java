@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 
 import javaz.utils.string.StringUtil;
@@ -28,6 +29,20 @@ import org.dom4j.io.XMLWriter;
 public class XmlUtil {
 	private static Logger logger=Logger.getLogger("javaz::XmlUtil");
 	/**
+	 * 从流里加载xml文档
+	 * @param in
+	 * @return
+	 */
+	public static Document parseXmlFromInputStream(InputStream in){
+		Document rt=null;
+		try {
+			rt=new SAXReader().read(in);
+		} catch (DocumentException e) {
+			logger.warn("parse xml file error.", e);
+		}
+		return rt;
+	}
+	/**
 	 * 解析xml文件
 	 * @param xmlFile
 	 * @return
@@ -41,7 +56,7 @@ public class XmlUtil {
 				logger.warn(xmlFile.getAbsoluteFile()+" parse error.", e);
 			}
 		}else{
-			logger.warn(xmlFile==null?"xmlFile is null":xmlFile.getAbsoluteFile()+"file not exist.");
+			logger.warn(xmlFile==null?"xmlFile is null":xmlFile.getAbsoluteFile()+" file not exist.");
 		}
 		return rt;
 	}
