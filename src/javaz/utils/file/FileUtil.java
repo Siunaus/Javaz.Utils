@@ -104,12 +104,23 @@ public class FileUtil {
 		return getFileStr(name, "utf8");
 	}
 	/**
+	 * 记录日志
+	 * @param logFile
+	 * @param log
+	 * @param e
+	 */
+	public static void log(String logFile,String log,Exception e){
+		appendFileMsg(logFile, log, e, "utf8", true);
+	}
+	/**
 	 * 追加消息至文件尾 指定输出格式
 	 * @param fileName
 	 * @param msg
+	 * @param e
 	 * @param charset
+	 * @param printSplit
 	 */
-	public static void appendFileMsg(String fileName,String msg,String charset){
+	private static void appendFileMsg(String fileName,String msg,Exception e,String charset,boolean printSplit){
 		if(StringUtil.isEmpty(fileName)||StringUtil.isEmpty(msg)||StringUtil.isEmpty(charset)){
 			return;
 		}
@@ -134,7 +145,7 @@ public class FileUtil {
 			file = new File(fileName);
 			try {
 				file.createNewFile();
-			} catch (IOException e) {
+			} catch (IOException e1) {
 			}
 		}
 		if(file!=null){
@@ -142,20 +153,36 @@ public class FileUtil {
 			try {
 				p = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,true),charset)));
 				p.write(msg);
-				p.write("\n");
-			} catch (Exception e) {
-				e.printStackTrace();
+				if(e!=null){
+					p.write("trace:\n");
+					e.printStackTrace(p);
+				}
+				if(printSplit){
+					p.write("=========================");
+				}
+				p.print("\n");
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}finally{
 				if(p!=null){
 					try {
 						p.close();
-					} catch (Exception e) {
-						e.printStackTrace();
+					} catch (Exception e1) {
+						e1.printStackTrace();
 					}
 					p=null;
 				}
 			}
 		}
+	}
+	/**
+	 * 追加消息至文件尾 指定输出格式
+	 * @param fileName
+	 * @param msg
+	 * @param charset
+	 */
+	public static void appendFileMsg(String fileName,String msg,String charset){
+		appendFileMsg(fileName, msg, null, charset, false);
 	}
 	/**
 	 * 追加消息至文件尾(默认utf8编码)

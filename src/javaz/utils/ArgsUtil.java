@@ -86,4 +86,38 @@ public class ArgsUtil {
 	public int getIntArg(String key){
 		return getIntArg(key, 0);
 	}
+	/**
+	 * 获取short型参数
+	 * @param key
+	 * @param defaultVal
+	 * @return
+	 */
+	public short getShortArg(String key,short defaultVal){
+		return StringUtil.toShort(getArg(key, defaultVal+""), defaultVal);
+	}
+	/**
+	 * 获取short型参数
+	 * @param key
+	 * @return
+	 */
+	public short getShortArg(String key){
+		return getShortArg(key, (short)0);
+	}
+	/**
+	 * 获取byte型参数
+	 * @param key
+	 * @param defaultVal
+	 * @return
+	 */
+	public byte getByteArg(String key,byte defaultVal){
+		return StringUtil.toByte(getArg(key, defaultVal+""), defaultVal);
+	}
+	/**
+	 * 获取byte型参数
+	 * @param key
+	 * @return
+	 */
+	public byte getByteArg(String key){
+		return getByteArg(key, (byte)0);
+	}
 }
