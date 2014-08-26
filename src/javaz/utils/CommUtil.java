@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+
 import javaz.utils.date.DateUtil;
 
 /**
@@ -18,6 +20,23 @@ import javaz.utils.date.DateUtil;
  * 2014年8月9日
  */
 public class CommUtil {
+	/**
+	 * map转json字符串
+	 * @param map
+	 * @return
+	 */
+	public static String getJsonStr(Map<String, String> map){
+		return JSON.toJSONString(map);
+	}
+	/**
+	 * json对象转map
+	 * @param json
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static Map<String,String> getMapFromJson(String json){
+		return JSON.parseObject(json, Map.class);
+	}
 	/**
 	 * 判断某个list是否没有数据
 	 * @param list
@@ -152,7 +171,7 @@ public class CommUtil {
 		return null;
 	}
 	@SuppressWarnings("unchecked")
-	private static <T> T getObjFromMap(Map<String,String> map, Object obj){
+	public static <T> T getObjFromMap(Map<String,String> map, Object obj){
 		try {
 			for(String key:map.keySet()){
 				Field field=getDeclaredField(obj, key);
