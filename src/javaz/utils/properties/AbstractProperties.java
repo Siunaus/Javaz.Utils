@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * Aug 9, 2014
  */
 public abstract class AbstractProperties {
-	static Logger logger=org.apache.log4j.Logger.getLogger("javaz::AbstractProperties");
+	protected static Logger logger=org.apache.log4j.Logger.getLogger("javaz::AbstractProperties");
 	/**
 	 * properties文件
 	 */
@@ -35,7 +35,7 @@ public abstract class AbstractProperties {
 		properties=new Properties();
 		load();
 	}
-	private void load(){
+	protected void load(){
 		try {
 			synchronized (lock) {
 				properties.load(new DataInputStream(PathUtil.getResourceInputStream(fileName)));

@@ -19,11 +19,12 @@ public abstract class AbstractPool<T> implements Pool<T> {
 	private int minSize;
 	protected Queue<T> queue=new ConcurrentLinkedQueue<T>();
 	protected Factory<T> builder;
+	private static final String KEY_POOL_MIN_SIZE="pool_min_size";
 	/**
 	 * 
 	 */
 	public AbstractPool() {
-		minSize=DefaultProperties.getInstance().getInt("pool_min_size", 1000);
+		minSize=DefaultProperties.getInstance().getInt(KEY_POOL_MIN_SIZE, 1000);
 	}
 	/**
 	 * 获取对象

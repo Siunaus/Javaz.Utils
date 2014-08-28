@@ -17,18 +17,20 @@ public class DefaultProperties extends AbstractProperties {
 	public static DefaultProperties getInstance(){
 		return instance;
 	}
+	private static final String KEY_VERSION_NAME="version_name";
+	private static final String KEY_VERSION_CODE="version_code";
 	/**
 	 * 获取版本名
 	 * @return
 	 */
 	public String getVersionName(){
-		return getProperty("version_name", "1.00.00");
+		return getProperty(KEY_VERSION_NAME, "1.00.00");
 	}
 	/**
 	 * 获取版本号
 	 * @return
 	 */
 	public int getVersionCode(){
-		return getInt("version_code", 10000);
+		return getInt(KEY_VERSION_CODE, 10000);
 	}
 }
