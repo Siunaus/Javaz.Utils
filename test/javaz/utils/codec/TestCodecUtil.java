@@ -22,9 +22,11 @@ public class TestCodecUtil extends TestCase {
 	@Test
 	public void testBase64(){
 		String nameString="Zero丹峰张";
-		String encode=CodecUtil.base64Encode(nameString.getBytes());
+		String encode=CodecUtil.base64Encode(nameString);
 		System.out.println(encode);
 		System.out.println(new String(CodecUtil.base64Decode(encode)));
+		System.out.println(CodecUtil.base64Encode("zhang但分"));
+		System.out.println(CodecUtil.base64Decode("emhhbmfkvYbliIY="));
 	}
 	public static class Obj implements Serializable{
 		/**

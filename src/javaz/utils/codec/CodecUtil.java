@@ -3,6 +3,8 @@
  */
 package javaz.utils.codec;
 
+import javaz.utils.string.StringUtil;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,6 +18,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Zero
  * @mail baozilaji@126.com
@@ -23,6 +27,7 @@ import java.security.MessageDigest;
  * Aug 9, 2014
  */
 public class CodecUtil {
+	static Logger logger = Logger.getLogger(CodecUtil.class);
 	/**
 	 * 反序列化
 	 * @param bytes
@@ -181,12 +186,35 @@ public class CodecUtil {
 											15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
 											-1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
 											41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1 };
+    /**
+     *
+     *
+     */
+    public static String base64Encode(String src) {
+        return base64Encode(src,"utf8");
+    }
+    /**
+     *
+     *
+     */
+    public static String base64Encode(String src,String charset) {
+        if(StringUtil.isEmpty(src)){
+            return "";
+        }
+        byte[] bs=null;
+        try{
+	        bs=src.getBytes(charset);
+        }catch(Exception exception){
+        		logger.error("Not support charset!", exception);
+        }
+        return base64EncodeBytes(bs);
+    }
 	/**
 	 * BASE64编码
 	 * @param data
 	 * @return
 	 */
-	public static String base64Encode(byte[] data) {
+	public static String base64EncodeBytes(byte[] data) {
 		StringBuffer sb = new StringBuffer();
 		int len = data.length;
 		int i = 0;
@@ -219,12 +247,35 @@ public class CodecUtil {
 		}
 		return sb.toString();
 	} 
+    /**
+     *
+     *
+     */
+    public static String base64Decode(String str){
+        return base64Decode(str,"utf8");
+    }
+    /**
+     *
+     *
+     */
+    public static String base64Decode(String str,String charset) {
+        if(StringUtil.isEmpty(str)){
+            return "";
+        }
+        String rt="";
+        try {
+			rt = new String(base64DecodeBytes(str),charset);
+		} catch (Exception e) {
+			logger.error("Not support charset",e);
+		}
+        return rt;
+    }
 	/**
 	 * BASE64解码
 	 * @param str
 	 * @return
 	 */
-	public static byte[] base64Decode(String str) {
+	public static byte[] base64DecodeBytes(String str) {
 		byte[] data = str.getBytes();
 		int len = data.length;
 		ByteArrayOutputStream buf = new ByteArrayOutputStream(len);
