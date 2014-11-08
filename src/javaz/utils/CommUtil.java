@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.alibaba.fastjson.JSON;
 
 import javaz.utils.date.DateUtil;
@@ -222,5 +224,29 @@ public class CommUtil {
 			sb.append(fieldName.toUpperCase());
 		}
 		return sb.toString();
+	}
+	public static void logInfo(Logger logger,String msg){
+		logInfo(logger, msg, null);
+	}
+	public static void logInfo(Logger logger,String msg,Exception e){
+		if(logger.isInfoEnabled()){
+			if(e!=null){
+				logger.info(msg, e);
+			}else{
+				logger.info(msg);
+			}
+		}
+	}
+	public static void logDebug(Logger logger,String msg){
+		logDebug(logger,msg,null);
+	}
+	public static void logDebug(Logger logger,String msg,Exception e){
+		if(logger.isDebugEnabled()){
+			if(e!=null){
+				logger.debug(msg,e);
+			}else{
+				logger.debug(msg);
+			}
+		}
 	}
 }
