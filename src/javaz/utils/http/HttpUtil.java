@@ -102,7 +102,7 @@ public class HttpUtil {
 			request=new HttpPost(url);
 		}else{
 			StringBuilder sbBuilder=new StringBuilder(url);
-			if(param!=null&!param.isEmpty()){
+			if(param!=null&&!param.isEmpty()){
 				String prefix="?";
 				if(sbBuilder.indexOf("?")!=-1){
 					prefix="&";
@@ -185,6 +185,7 @@ public class HttpUtil {
 		Map<String, String> paramMap=new HashMap<String, String>();
 		paramMap.put("access_token", "CAACEdEose0cBABZC7johp8G7xDJUiZBpE8iXVPXZBGVb3FT9IT0B1fDRHoTWozJjMxvTi47UTlI3YbiutyTEZBLf2KizGHIHhZALmB24YDOXKZBt1UZCZAXatQg4jTmWnlHbMs1hGoZA8RhqukP6VjUvaNohFscy0QqZBhG5y0wXPgbzjmUeGDUZAQF9tq4CcURo4SbWxEAaHVNLm873UDkQFQJvsB6VSslBN8ZD");
 		paramMap.put("fields", "id,name");
-		System.out.println(httpsGet("https://graph.facebook.com/v2.1/me", paramMap));
+//		System.out.println(httpsGet("https://graph.facebook.com/v2.1/me", paramMap));
+		System.out.println(httpGet("http://oa.leuok.com/sys.d?a=index", null));
 	}
 }

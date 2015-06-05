@@ -2,6 +2,7 @@
 <!DOCTYPE project>
 <project name="Javaz-Utils" default="dist" basedir=".">
 	<property name="src.dir" location="src"/>
+	<property name="res.dir" location="res"></property>
 	<property name="test.dir" location="test"/>
 	<property name="classes.dir" location="classes"/>
 	<property name="lib.dir" location="lib"/>
@@ -54,8 +55,8 @@
 	<!-- Copy the resource files to classes directory                        -->
 	<!-- =================================================================== -->
 	<target name="copyRes">
-		<copy todir="${classes.dir}">
-			<fileset dir="${src.dir}">
+		<copy todir="${dist.dir}">
+			<fileset dir="${res.dir}">
 				<include name="**/*.properties"/>
 				<include name="**/*.xml"/>
 			</fileset>
@@ -92,6 +93,10 @@
 			<exclude name="**/Test*"/>
 		</jar>
 		<antcall target="clean"></antcall>
+		<tstamp>
+		    <format property="now" pattern="yyyy-MM-dd HH:mm:ss" locale="us"/>
+		</tstamp>
+        <echo>${now}</echo>
 	</target>
 	
 
