@@ -9,7 +9,7 @@ package javaz.utils.pool;
  *
  * Aug 7, 2014
  */
-public class Message {
+public class TestMessage {
 	int id;
 	long timestamp;
 	int seq;

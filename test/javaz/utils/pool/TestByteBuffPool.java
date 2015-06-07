@@ -11,12 +11,12 @@ import java.nio.ByteBuffer;
  *
  * Aug 7, 2014
  */
-public class ByteBuffPool extends AbstractPool<ByteBuffer> {
-	private static ByteBuffPool instance=new ByteBuffPool();
-	public static ByteBuffPool getInstance(){
+public class TestByteBuffPool extends AbstractPool<ByteBuffer> {
+	private static TestByteBuffPool instance=new TestByteBuffPool();
+	public static TestByteBuffPool getInstance(){
 		return instance;
 	}
-	private ByteBuffPool(){
+	private TestByteBuffPool(){
 		setBuilder(new Factory<ByteBuffer>() {
 			public ByteBuffer buildObj() {
 				return ByteBuffer.allocate(1024);
@@ -27,6 +27,6 @@ public class ByteBuffPool extends AbstractPool<ByteBuffer> {
 		});
 	}
 	public static void main(String[] args) {
-		System.out.println(ByteBuffPool.getInstance().borrowObj());
+		System.out.println(TestByteBuffPool.getInstance().borrowObj());
 	}
 }
