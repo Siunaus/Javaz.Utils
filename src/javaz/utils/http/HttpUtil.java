@@ -11,13 +11,18 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javaz.utils.string.StringUtil;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -27,10 +32,12 @@ import org.apache.http.conn.ssl.SSLContextBuilder;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
+import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.alibaba.fastjson.JSONObject;
@@ -43,6 +50,8 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class HttpUtil {
 	static Logger logger=Logger.getLogger(HttpUtil.class);
+	private static final int HTTP_TIME_OUT=6000;
+	private static final RequestConfig requestConfig=RequestConfig.custom().setSocketTimeout(HTTP_TIME_OUT).setConnectTimeout(HTTP_TIME_OUT).build();
 	private static final String ENCODING="utf-8";
 	private static enum ProtocolType{
 		HTTP,
@@ -100,6 +109,19 @@ public class HttpUtil {
 		HttpRequestBase request=null;
 		if(reqType==ReqType.POST){
 			request=new HttpPost(url);
+			request.setHeader("Content-Type", "application/x-www-form-urlencoded");
+			if(param!=null&&!param.isEmpty()){
+				List<NameValuePair> formParam=new ArrayList<NameValuePair>();
+				for(Entry<String, String> entry:param.entrySet()){
+					formParam.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+				}
+				try {
+					UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(formParam, ENCODING);
+					((HttpPost)request).setEntity(urlEncodedFormEntity);
+				} catch (UnsupportedEncodingException e) {
+					logger.error("", e);
+				}
+			}
 		}else{
 			StringBuilder sbBuilder=new StringBuilder(url);
 			if(param!=null&&!param.isEmpty()){
@@ -114,6 +136,7 @@ public class HttpUtil {
 			}
 			request=new HttpGet(sbBuilder.toString());
 		}
+		request.setConfig(requestConfig);
 		CloseableHttpResponse response=null;
 		try {
 			if(heads!=null&&!heads.isEmpty()){
@@ -163,29 +186,94 @@ public class HttpUtil {
 		}
 		return null;
 	}
+	////////https get//////
 	public static String httpsGet(String url,Map<String, String> param){
 		return request(ProtocolType.HTTPS, ReqType.GET, ResDataType.STRING, url, param, null, null, ENCODING);
 	}
 	public static JSONObject httpsGetJson(String url,Map<String, String>param){
 		return request(ProtocolType.HTTPS, ReqType.GET, ResDataType.JSON, url, param, null, null, ENCODING);
 	}
+	public static Element httpsGetXml(String url, Map<String, String> param){
+		return request(ProtocolType.HTTPS, ReqType.GET, ResDataType.XML, url, param, null, null, ENCODING);
+	}
+	public static String httpsGet(String url,Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTPS, ReqType.GET, ResDataType.STRING, url, param, heads, cookies, ENCODING);
+	}
+	public static JSONObject httpsGetJson(String url,Map<String, String>param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTPS, ReqType.GET, ResDataType.JSON, url, param, heads, cookies, ENCODING);
+	}
+	public static Element httpsGetXml(String url, Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTPS, ReqType.GET, ResDataType.XML, url, param, heads, cookies, ENCODING);
+	}
+	////////https post//////
+	public static String httpsPost(String url,Map<String, String> param){
+		return request(ProtocolType.HTTPS, ReqType.POST, ResDataType.STRING, url, param, null, null, ENCODING);
+	}
+	public static JSONObject httpsPostJson(String url,Map<String, String>param){
+		return request(ProtocolType.HTTPS, ReqType.POST, ResDataType.JSON, url, param, null, null, ENCODING);
+	}
+	public static Element httpsPostXml(String url, Map<String, String> param){
+		return request(ProtocolType.HTTPS, ReqType.POST, ResDataType.XML, url, param, null, null, ENCODING);
+	}
+	public static String httpsPost(String url,Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTPS, ReqType.POST, ResDataType.STRING, url, param, heads, cookies, ENCODING);
+	}
+	public static JSONObject httpsPostJson(String url,Map<String, String>param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTPS, ReqType.POST, ResDataType.JSON, url, param, heads, cookies, ENCODING);
+	}
+	public static Element httpsPostXml(String url, Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTPS, ReqType.POST, ResDataType.XML, url, param, heads, cookies, ENCODING);
+	}
+	//////////http get///////
 	public static String httpGet(String url,Map<String,String> param){
 		return request(ProtocolType.HTTP, ReqType.GET, ResDataType.STRING, url, param, null, null, ENCODING);
-	}
-	public static String httpPost(String url,Map<String, String> param){
-		return request(ProtocolType.HTTP, ReqType.POST, ResDataType.STRING, url, param, null, null, ENCODING);
 	}
 	public static JSONObject httpGetJson(String url,Map<String, String> param){
 		return request(ProtocolType.HTTP, ReqType.GET, ResDataType.JSON, url,param,null,null, ENCODING);
 	}
+	public static Element httpGetXml(String url, Map<String, String> param){
+		return request(ProtocolType.HTTP, ReqType.GET, ResDataType.XML, url, param, null, null, ENCODING);
+	}
+	public static String httpGet(String url,Map<String,String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTP, ReqType.GET, ResDataType.STRING, url, param, heads, cookies, ENCODING);
+	}
+	public static JSONObject httpGetJson(String url,Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTP, ReqType.GET, ResDataType.JSON, url,param,heads,cookies, ENCODING);
+	}
+	public static Element httpGetXml(String url, Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTP, ReqType.GET, ResDataType.XML, url, param, heads, cookies, ENCODING);
+	}
+	////////http post////////
+	public static String httpPost(String url,Map<String, String> param){
+		return request(ProtocolType.HTTP, ReqType.POST, ResDataType.STRING, url, param, null, null, ENCODING);
+	}
 	public static JSONObject httpPostJson(String url,Map<String, String> param){
 		return request(ProtocolType.HTTP, ReqType.POST, ResDataType.JSON, url,param,null,null, ENCODING);
 	}
+	public static Element httpPostXml(String url, Map<String, String> param){
+		return request(ProtocolType.HTTP, ReqType.POST, ResDataType.XML, url, param, null, null, ENCODING);
+	}
+	public static String httpPost(String url,Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTP, ReqType.POST, ResDataType.STRING, url, param, heads, cookies, ENCODING);
+	}
+	public static JSONObject httpPostJson(String url,Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTP, ReqType.POST, ResDataType.JSON, url,param,heads,cookies, ENCODING);
+	}
+	public static Element httpPostXml(String url, Map<String, String> param,Map<String,String> heads,Map<String, String> cookies){
+		return request(ProtocolType.HTTP, ReqType.POST, ResDataType.XML, url, param, heads, cookies, ENCODING);
+	}
 	public static void main(String[] args) throws Exception{
-		Map<String, String> paramMap=new HashMap<String, String>();
-		paramMap.put("access_token", "CAACEdEose0cBABZC7johp8G7xDJUiZBpE8iXVPXZBGVb3FT9IT0B1fDRHoTWozJjMxvTi47UTlI3YbiutyTEZBLf2KizGHIHhZALmB24YDOXKZBt1UZCZAXatQg4jTmWnlHbMs1hGoZA8RhqukP6VjUvaNohFscy0QqZBhG5y0wXPgbzjmUeGDUZAQF9tq4CcURo4SbWxEAaHVNLm873UDkQFQJvsB6VSslBN8ZD");
-		paramMap.put("fields", "id,name");
+//		Map<String, String> paramMap=new HashMap<String, String>();
+//		paramMap.put("access_token", "CAACEdEose0cBABZC7johp8G7xDJUiZBpE8iXVPXZBGVb3FT9IT0B1fDRHoTWozJjMxvTi47UTlI3YbiutyTEZBLf2KizGHIHhZALmB24YDOXKZBt1UZCZAXatQg4jTmWnlHbMs1hGoZA8RhqukP6VjUvaNohFscy0QqZBhG5y0wXPgbzjmUeGDUZAQF9tq4CcURo4SbWxEAaHVNLm873UDkQFQJvsB6VSslBN8ZD");
+//		paramMap.put("fields", "id,name");
 //		System.out.println(httpsGet("https://graph.facebook.com/v2.1/me", paramMap));
-		System.out.println(httpGet("http://oa.leuok.com/sys.d?a=index", null));
+		
+		
+//		System.out.println(httpGet("http://oa.leuok.com/sys.d?a=index", null));
+		
+		Map<String, String> paramMap=new HashMap<String, String>();
+		paramMap.put("k", "ddh4fgdfadfm3PdfsdfdhPMw11PNsJx8");
+		System.out.println(httpPost("http://114.66.5.82:10101/game_state_xxyyzzYuxoq4sfy0Iuy.jsp", paramMap));
+		System.out.println(httpGet("http://114.66.5.82:10101/game_state_xxyyzzYuxoq4sfy0Iuy.jsp", paramMap));
 	}
 }
