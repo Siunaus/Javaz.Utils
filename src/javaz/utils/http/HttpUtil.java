@@ -172,6 +172,7 @@ public class HttpUtil {
 		} catch (ClientProtocolException e) {
 			logger.error("ClientProtocolException:", e);
 		} catch (IOException e) {
+			logger.error(StringUtil.format("request url:{0}", url));
 			logger.error("IOException:", e);
 		} catch (IllegalStateException e) {
 			logger.error("IllegalStateException:", e);
