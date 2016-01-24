@@ -6,6 +6,8 @@ package javaz.utils.math;
 import java.util.List;
 import java.util.Random;
 
+import javaz.utils.string.StringUtil;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -104,6 +106,39 @@ public class MathUtil {
 		int ret=0;
 		ret=(int) Math.round(d);
 		return ret;
+	}
+	/**
+	 * 二进制转十进制
+	 * @param s
+	 */
+	public static int convertAlgorism(String s){
+		if(StringUtil.isEmpty(s)){
+			return 0;
+		}
+		return convertAlgorism(s.toCharArray());
+	}
+	private static int convertAlgorism(char[] cars) {
+		if(cars==null){
+			return 0;
+		}
+		int result = 0;
+		int num = 0;
+		for (int i = cars.length - 1; 0 <= i; i--) {
+			int temp = 2;
+			if (num == 0) {
+				temp = 1;
+			} else if (num == 1) {
+				temp = 2;
+			} else {
+				for (int j = 1; j < num; j++) {
+					temp = temp * 2;
+				}
+			}
+			int sum = Integer.parseInt(String.valueOf(cars[i]));
+			result = result + (sum * temp);
+			num++;
+		}
+		return result;
 	}
 	/**
 	 * 按权重随机抽取

@@ -65,7 +65,22 @@ public class StringUtil {
 		}
 		return s;
 	}
-
+	/**
+	 * 字符串是否为纯数字字符
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNumber(String str){
+		if(str==null||str.isEmpty()){
+			return false;
+		}
+		try {
+			Integer.parseInt(str);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 	@SuppressWarnings("unchecked")
 	private static <T> T to(String string,T defaultVal){
 		T rt=defaultVal;
